@@ -24,25 +24,29 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    .news-item {
+    .news-item, .crowdfund-item {
       margin-bottom: 1.5rem;
       padding: 1rem;
       border-left: 6px solid #3498db;
       background: #f9f9f9;
       transition: background 0.3s;
     }
-    .news-item:hover {
+    .news-item:hover, .crowdfund-item:hover {
       background: #eef6ff;
     }
-    .news-item a {
+    .news-item a, .crowdfund-item a {
       color: #2c3e50;
       text-decoration: none;
       font-weight: bold;
       display: block;
       margin-top: 0.5rem;
     }
-    .news-item a:hover {
+    .news-item a:hover, .crowdfund-item a:hover {
       text-decoration: underline;
+    }
+    h2 {
+      color: #2c3e50;
+      margin-top: 3rem;
     }
   </style>
   <script>
@@ -57,13 +61,34 @@
         container.appendChild(div);
       });
     }
-    window.onload = loadNews;
+
+    async function loadCrowdfunding() {
+      const response = await fetch('crowdfunding-data.json');
+      const data = await response.json();
+      const container = document.getElementById('crowdfunding-items');
+      data.items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'crowdfund-item';
+        div.innerHTML = `<p><strong>${item.title}</strong> ${item.summary}</p><a href="${item.link}" target="_blank">Back this project →</a>`;
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = () => {
+      loadNews();
+      loadCrowdfunding();
+    };
   </script>
 </head>
 <body>
   <h1>Board Game News – August 2025</h1>
   <div class="news-container" id="news-items">
     <!-- News items will be loaded here -->
+  </div>
+
+  <h2 style="text-align: center;">Crowdfunding Projects – August 2025</h2>
+  <div class="news-container" id="crowdfunding-items">
+    <!-- Crowdfunding items will be loaded here -->
   </div>
 </body>
 </html>
