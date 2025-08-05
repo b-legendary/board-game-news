@@ -6,75 +6,64 @@
   <title>Board Game News – August 2025</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4ff, #e8ffe8);
       margin: 0;
       padding: 2rem;
+      color: #222;
     }
     h1 {
       text-align: center;
+      color: #2c3e50;
     }
-    .game-section {
-      background: white;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin: 1rem auto;
+    .news-container {
       max-width: 800px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    .game-section img {
-      max-width: 100%;
-      border-radius: 5px;
+    .news-item {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-left: 6px solid #3498db;
+      background: #f9f9f9;
+      transition: background 0.3s;
     }
-    .game-section h2 {
+    .news-item:hover {
+      background: #eef6ff;
+    }
+    .news-item a {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
       margin-top: 0.5rem;
     }
-    .game-section a {
-      color: #2a5dff;
-      text-decoration: none;
-    }
-    .game-section a:hover {
+    .news-item a:hover {
       text-decoration: underline;
     }
   </style>
+  <script>
+    async function loadNews() {
+      const response = await fetch('news-data.json');
+      const news = await response.json();
+      const container = document.getElementById('news-items');
+      news.items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'news-item';
+        div.innerHTML = `<p><strong>${item.title}</strong> ${item.summary}</p><a href="${item.link}" target="_blank">Read the full article →</a>`;
+        container.appendChild(div);
+      });
+    }
+    window.onload = loadNews;
+  </script>
 </head>
 <body>
   <h1>Board Game News – August 2025</h1>
-
-  <div class="game-section">
-    <h2>Thunder’s Edge – Twilight Imperium Expansion</h2>
-    <img src="https://images.fantasyflightgames.com/filer_public/ffg_thunders_edge.jpg" alt="Thunder’s Edge box art" />
-    <p>Fantasy Flight announced <strong>Thunder’s Edge</strong>, a major expansion for Twilight Imperium 4E. Big changes are coming to the galaxy!</p>
-    <a href="https://www.fantasyflightgames.com/en/news/2025/7/31/thunders-edge/" target="_blank">Read more</a>
+  <div class="news-container" id="news-items">
+    <!-- News items will be loaded here -->
   </div>
-
-  <div class="game-section">
-    <h2>Solar Gardens – Darrington Press</h2>
-    <img src="https://images.darringtonpress.com/solar_gardens_box.jpg" alt="Solar Gardens" />
-    <p>Darrington Press has released <strong>Solar Gardens</strong>, a beautiful tile-drafting board game about building vibrant landscapes in a future world.</p>
-    <a href="https://gamingtrend.com/news/darrington-press-has-a-brand-new-board-game-available-now/" target="_blank">Read more</a>
-  </div>
-
-  <div class="game-section">
-    <h2>Dungeon Crawler Carl – Renegade Games</h2>
-    <img src="https://renegadegamestudios.com/media/dungeon_crawler_carl.jpg" alt="Dungeon Crawler Carl art" />
-    <p>Renegade Games has secured rights to <strong>Dungeon Crawler Carl</strong> and is developing board, RPG, and deck-building games based on the popular book series.</p>
-    <a href="https://www.rascal.news/renegade-games-secures-tabletop-game-rights-to-dungeon-crawler-carl-promising-an-rpg-and-board-games/" target="_blank">Read more</a>
-  </div>
-
-  <div class="game-section">
-    <h2>Covenant – Devir</h2>
-    <img src="https://www.devirgames.com/img/covenant_preview.jpg" alt="Covenant board game" />
-    <p>Devir announced <strong>Covenant</strong>, a strategic fantasy worker-placement game, launching at SPIEL Essen 2025.</p>
-    <a href="https://icv2.com/articles/news/view/60115/devir-games-unveils-covenant" target="_blank">Read more</a>
-  </div>
-
-  <div class="game-section">
-    <h2>Arkham Horror Card Game – Environment Format</h2>
-    <img src="https://images.fantasyflightgames.com/filer_public/arkham_environment.jpg" alt="Arkham Horror new format" />
-    <p>Fantasy Flight introduced a new format for <strong>Arkham Horror: The Card Game</strong>, with "Current" and "Legacy" environments reshaping the play experience.</p>
-    <a href="https://www.fantasyflightgames.com/en/news/2025/6/30/ffg-live-in-july-4/" target="_blank">Read more</a>
-  </div>
-
 </body>
 </html>
